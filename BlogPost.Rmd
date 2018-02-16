@@ -1,0 +1,85 @@
+---
+title: "Learning for Loop"
+output:
+  html_document: default
+css: styles copy.css
+---
+
+This is a tutorial on a basic for loop in R aimed for the beginners.
+
+A loop is a way to repeat a sequence of instructions under certain conditions. This allows you to automate parts of your code that are in need of repetition.
+
+Before writing loops in R, remember when surfing on the web you’ll often read that one should avoid making use of loops in R. It is because R supports vectorization (It allows for much faster calculations). 
+
+For example, solutions that make use of loops are less efficient than vectorized solutions that make use of apply functions, such as lapply and sapply. It’s often better to use the latter. 
+
+# Writing a simple for loop in R
+Suppose you want to do several printouts of the following form: The year is [year] where [year] is equal to 2013, 2014, up to 2018. You can do this as follows:
+
+```{r}
+
+print(paste("The year is", 2013))
+print(paste("The year is", 2014))
+print(paste("The year is", 2015))
+print(paste("The year is", 2016))
+print(paste("The year is", 2017))
+print(paste("The year is", 2018))
+
+```
+
+The best way to understand what is going on in the for loop, is by reading it as follows:
+“For each year that is in the sequence c(2013,2014,2015,2016,2017,2018) you execute the code chunk print(paste("The year is", year))”.
+Once the for loop has executed the code chunk for every year in the vector, the loop stops and goes to the first instruction after the loop block.
+
+By using a for loop you only need to write down your code chunk once (instead of six times).
+The for loop then runs the statement once for each provided value (the different years we provided) and sets the variable (year in this case) to that value.
+You can even simplify the code even more: c(2010,2011,2012,2013,2014,2015) can also be written as 2010:2015; this creates the exact same sequence:
+
+```{r}
+
+for (year in 2013:2018){
+  print(paste("The year is", year))
+}
+
+```
+
+As a last note on the for loop in R:
+in this case we made use of the variable year but in fact any variable could be used here.
+For example you could have used i, a commonly-used variable in for loops that stands for index:
+
+```{r}
+
+for (i in 2013:2018){
+  print(paste("The year is", i))
+}
+
+```
+
+This produces the exact same output. So you can really name the variable anyway you want, but it’s just more understandable if you use meaningful names.
+
+## Using Next
+
+Let’s have a look at a more mathematical example. Suppose you need to print all uneven numbers between 1 and 10 but even numbers should not be printed. In that case your loop would look like this:
+
+```{r}
+
+for (i in 1:10) {
+  if (!i %% 2){
+    next
+  }
+    print(i)
+}
+
+```
+
+Notice the introduction of the next statement. Let’s explore the meaning of this statement walking through this loop together:
+
+When i is between 1 and 10, we enter the loop and if not the loop stops.
+In case we enter the loop, we need to check if the value of i is uneven. If the value of i has a remainder of zero when divided by 2 (that’s why we use the modulus operand %%) we don’t enter the if statement, execute the print function and loop back.
+In case the remainder is non zero, the if statement evaluates to TRUE and we enter the conditional. Here we now see the next statement which causes to loop back to the i in 1:10 condition thereby ignoring the the instructions that follows (so the print(i)).
+
+## To Learn more about R
+
+I recommend going to https://www.r-bloggers.com/ if you want to learn more about R.
+This is a website of R news and tutorials contributed by many R bloggers.
+
